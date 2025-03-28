@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        
+        body {
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+            transition: background 3s ease-in-out;
+            animation: cambiarFondo 10s infinite alternate;
+        }
+
+        @keyframes cambiarFondo {
+            0% { background-color: #f0f0f0; }
+            50% { background-color: #d4a5a5; }
+            100% { background-color: #f7e1b5; }
+        }
+
+        .carta {
+            background-color: #fff;
+            padding: 20px;
+            width: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 10;
+            border: 2px solid #888;
+            text-align: center;
+            font-size: 1.6rem;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .firma {
+            margin-top: 30px;
+            text-align: right;
+            color: #333;
+        }
+
+        .corazon {
+            position: absolute;
+            top: -50px;
+            font-size: 3rem;
+            pointer-events: none;
+            animation: flotar 10s linear infinite;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(100vh) translateX(calc(-50vw + 100vw * var(--direccion))); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="carta" id="carta1">
+        <p>Me gusta tu delicada cintura, me recuerda el objetivo que busco.</p>
+        <p>Tus caderas hacen que resalten tus piernas, esas piernas que por la noche me dan calor.</p>
+        <p>Tus pechos que me provocan pérdida de cabeza, al verlos solo quiero dormir en ellos.</p>
+    </div>
+
+    <div class="carta" id="carta2">
+        <p>Tu bello rostro me fascina.</p>
+        <p>Tus ojos, esos bellos ojos color café, café que quita el sueño,</p>
+        <p>el que me provoca insomnio pensando cuándo me volverán a ver.</p>
+    </div>
+
+    <div class="carta" id="carta3">
+        <p>Tu personalidad,</p>
+        <p>esa pequeña niña que se enoja por todo pero en el fondo solo quiere cariño.</p>
+        <p>La misma que puede ser la mejor novia del mundo pero también la mejor mamá,</p>
+        <p>ya que a pesar de todo me sigues cuidando.</p>
+        <div class="firma">
+            <p>Con todo mi amor,</p>
+            <p>DRACO</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarCartas() {
+            const cartas = [document.getElementById("carta1"), document.getElementById("carta2"), document.getElementById("carta3")];
+            let index = 0;
+            function mostrarSiguiente() {
+                if (index < cartas.length) {
+                    cartas[index].style.opacity = 1;
+                    setTimeout(mostrarSiguiente, 8000);
+                    index++;
+                }
+            }
+            mostrarSiguiente();
+        }
+        
+        function crearCorazones() {
+            const corazones = ["❤️", "💖", "💘", "💝", "💗", "💕"];
+            for (let i = 0; i < 20; i++) {
+                let corazon = document.createElement("div");
+                corazon.classList.add("corazon");
+                corazon.innerHTML = corazones[Math.floor(Math.random() * corazones.length)];
+                corazon.style.left = Math.random() * 100 + "vw";
+                corazon.style.color = "red";
+                corazon.style.textShadow = "0 0 10px red, 0 0 20px red";
+                corazon.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                corazon.style.setProperty("--direccion", Math.random());
+                document.body.appendChild(corazon);
+            }
+        }
+        
+        window.onload = function() {
+            mostrarCartas();
+            crearCorazones();
+        };
+    </script>
+</body>
+</html>
